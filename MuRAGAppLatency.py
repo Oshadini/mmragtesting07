@@ -460,7 +460,7 @@ if uploaded_file is not None:
     
 
     chain_multimodal_rag = multi_modal_rag_chain(retriever_multi_vector_img)
-    
+    st.write(f"{bullet_point} Extraction process completed")
 
    
     if pr ==True:
