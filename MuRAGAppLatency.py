@@ -41,7 +41,7 @@ from IPython.display import HTML, display
 from langchain.schema.runnable import RunnableLambda, RunnablePassthrough
 from PIL import Image
 from langchain.chat_models import ChatOpenAI
-    
+from timeit import default_timer as timer   
 
 
 os.environ["LANGCHAIN_TRACING_V2"] = "true"
@@ -465,6 +465,7 @@ if uploaded_file is not None:
    
     if pr ==True:
         with st.spinner("Processing your question..."):
+            start = timer()
             response= chain_multimodal_rag.invoke(question)
             st.write(response)
             docs = retriever_multi_vector_img.get_relevant_documents(question, limit=1)
