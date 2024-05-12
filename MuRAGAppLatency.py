@@ -92,7 +92,7 @@ bullet_point = "◇"
 question = st.text_input('Enter a question') 
 pr = st.button("Generate Response")
 if uploaded_file is not None:
-    st.spinner():
+    st.spinner()
     st.write(f"{bullet_point} Extraction process started")
     temp_file="./temp.pdf"
     with open(temp_file,"wb") as file:
