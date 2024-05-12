@@ -89,7 +89,8 @@ Multi-Modal RAG App with Multi Vector Retriever
 bullet_point = "◇"
 
 
-
+question = st.text_input('Enter a question') 
+pr = st.button("Generate")
 if uploaded_file is not None:
     st.title("Extraction process:-")
     st.write(f"{bullet_point} Extraction process started")
@@ -461,8 +462,8 @@ if uploaded_file is not None:
     chain_multimodal_rag = multi_modal_rag_chain(retriever_multi_vector_img)
     
 
-    question = st.text_input('Enter a question') 
-    if st.button("Generate Response"):
+   
+    if pr ==True::
         response= chain_multimodal_rag.invoke(question)
         st.write(response)
         docs = retriever_multi_vector_img.get_relevant_documents(question, limit=1)
