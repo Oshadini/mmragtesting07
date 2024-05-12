@@ -470,6 +470,7 @@ if uploaded_file is not None:
         response= chain_multimodal_rag.invoke(question)
         st.write(response)
         docs = retriever_multi_vector_img.get_relevant_documents(question, limit=1)
+        st.write(docs)
     
         found_image = False  # Flag variable to track if an image has been found
     
