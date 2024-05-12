@@ -288,8 +288,8 @@ if uploaded_file is not None:
         img_base64_lists = st.session_state["img_base64_list"]  
         image_summaries = st.session_state["image_summaries"]  
     
-    st.write(f"{bullet_point} \t\tImage summaries generation completed") 
-    st.write(f"{bullet_point} Summary generation process completed")  
+    #st.write(f"{bullet_point} \t\tImage summaries generation completed") 
+    #st.write(f"{bullet_point} Summary generation process completed")  
         
     
     @st.cache_resource()
