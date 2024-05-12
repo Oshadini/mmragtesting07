@@ -93,7 +93,7 @@ question = st.text_input('Enter a question')
 pr = st.button("Generate Response")
 if uploaded_file is not None:
     st.spinner()
-    st.write(f"{bullet_point} Extraction process started")
+    #st.write(f"{bullet_point} Extraction process started")
     temp_file="./temp.pdf"
     with open(temp_file,"wb") as file:
         file.write(uploaded_file.getvalue())
@@ -460,7 +460,7 @@ if uploaded_file is not None:
     
 
     chain_multimodal_rag = multi_modal_rag_chain(retriever_multi_vector_img)
-    st.write(f"{bullet_point} Extraction process completed")
+    #st.write(f"{bullet_point} Extraction process completed")
 
    
     if pr ==True:
