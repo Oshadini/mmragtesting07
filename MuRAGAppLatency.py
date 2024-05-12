@@ -94,9 +94,9 @@ pr = st.button("Generate")
 if uploaded_file is not None:
     with st.spinner("Extraction process...."):
     #st.write(f"{bullet_point} Extraction process started")
-    temp_file="./temp.pdf"
-    with open(temp_file,"wb") as file:
-        file.write(uploaded_file.getvalue())
+        temp_file="./temp.pdf"
+        with open(temp_file,"wb") as file:
+            file.write(uploaded_file.getvalue())
 
     
     image_path = "./"
@@ -464,26 +464,27 @@ if uploaded_file is not None:
 
    
     if pr ==True:
-        response= chain_multimodal_rag.invoke(question)
-        st.write(response)
-        docs = retriever_multi_vector_img.get_relevant_documents(question, limit=1)
-        st.write(docs)
-    
-        found_image = False  # Flag variable to track if an image has been found
-    
-        for i in range(len(docs)):
-          if docs[i].startswith('/9j') and not found_image:
-              #display.display(HTML(f'<img src="data:image/jpeg;base64,{docs[i]}">'))
-    
-              base64_image = docs[i]
-              image_data = base64.b64decode(base64_image)
-    
-              # Display the image
-              #img = Image.open(BytesIO(image_data))
-              #img.show()
-              #img = load_image(image_data)
-              st.image(image_data)
-              found_image = True  # Set the flag to True to indicate that an image has been found 
+        with st.spinner("Response generation in process....."):
+            response= chain_multimodal_rag.invoke(question)
+            st.write(response)
+            docs = retriever_multi_vector_img.get_relevant_documents(question, limit=1)
+            st.write(docs)
+        
+            found_image = False  # Flag variable to track if an image has been found
+        
+            for i in range(len(docs)):
+              if docs[i].startswith('/9j') and not found_image:
+                  #display.display(HTML(f'<img src="data:image/jpeg;base64,{docs[i]}">'))
+        
+                  base64_image = docs[i]
+                  image_data = base64.b64decode(base64_image)
+        
+                  # Display the image
+                  #img = Image.open(BytesIO(image_data))
+                  #img.show()
+                  #img = load_image(image_data)
+                  st.image(image_data)
+                  found_image = True  # Set the flag to True to indicate that an image has been found 
         
     
     
