@@ -463,7 +463,7 @@ if uploaded_file is not None:
     
 
    
-    if pr ==True::
+    if pr ==True:
         response= chain_multimodal_rag.invoke(question)
         st.write(response)
         docs = retriever_multi_vector_img.get_relevant_documents(question, limit=1)
