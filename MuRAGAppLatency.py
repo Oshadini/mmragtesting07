@@ -92,8 +92,8 @@ bullet_point = "◇"
 question = st.text_input('Enter a question') 
 pr = st.button("Generate")
 if uploaded_file is not None:
-    st.title("Extraction process:-")
-    st.write(f"{bullet_point} Extraction process started")
+    with st.spinner("Extraction process...."):
+    #st.write(f"{bullet_point} Extraction process started")
     temp_file="./temp.pdf"
     with open(temp_file,"wb") as file:
         file.write(uploaded_file.getvalue())
@@ -122,14 +122,14 @@ if uploaded_file is not None:
 
     # Categorize elements by type
     @st.cache_data()
-    def categorize_elements(_raw_pdf_elements):
+    def categorize_elements(raw_pdf_elements):
       """
       Categorize extracted elements from a PDF into tables and texts.
       raw_pdf_elements: List of unstructured.documents.elements
       """
       tables = []
       texts = []
-      for element in _raw_pdf_elements:
+      for element in raw_pdf_elements:
           if "unstructured.documents.elements.Table" in str(type(element)):
               tables.append(str(element))
           elif "unstructured.documents.elements.CompositeElement" in str(type(element)):
@@ -141,16 +141,16 @@ if uploaded_file is not None:
 
     if "texts" not in st.session_state or "tables" not in st.session_state:
         # Create session state variables
-        with st.spinner("Categorizing Text & Table elements....."):
-            texts, tables = categorize_elements(pdf_elements)
+        #with st.spinner("Categorizing Text & Table elements....."):
+        texts, tables = categorize_elements(pdf_elements)
         st.session_state["texts"] = texts
         st.session_state["tables"] = tables
     else:
         # Use already populated session state variables
         texts = st.session_state["texts"]
         tables = st.session_state["tables"]
-    st.write(f"{bullet_point} \t\tCategorize elements completed") 
-    st.write(f"{bullet_point} Extraction process completed")
+    #st.write(f"{bullet_point} \t\tCategorize elements completed") 
+    #st.write(f"{bullet_point} Extraction process completed")
 
     # Generate summaries of text elements
     @st.cache_data()
@@ -202,20 +202,20 @@ if uploaded_file is not None:
 
       return text_summaries, table_summaries
         
-    st.title("Summary generation process:-")
-    st.write(f"{bullet_point} Summary generation process started")
+    #st.title("Summary generation process:-")
+    #st.write(f"{bullet_point} Summary generation process started")
     
     if "text_summaries" not in st.session_state or "table_summaries" not in st.session_state:
         # Create session state variables
-         with st.spinner("Generating Text & Table summaries....."):
-            text_summaries, table_summaries = generate_text_summaries(texts, tables, summarize_texts=True)
-            st.session_state["text_summaries"] = text_summaries
-            st.session_state["table_summaries"] = table_summaries
+         #with st.spinner("Generating Text & Table summaries....."):
+        text_summaries, table_summaries = generate_text_summaries(texts, tables, summarize_texts=True)
+        st.session_state["text_summaries"] = text_summaries
+        st.session_state["table_summaries"] = table_summaries
     else:
         # Use already populated session state variables
         text_summaries = st.session_state["text_summaries"]
         table_summaries = st.session_state["table_summaries"]
-    st.write(f"{bullet_point} \t\tText & Table summaries generation completed")  
+    #st.write(f"{bullet_point} \t\tText & Table summaries generation completed")  
                                                                                             
     
     
