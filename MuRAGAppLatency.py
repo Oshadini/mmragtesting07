@@ -330,13 +330,9 @@ if uploaded_file is not None:
       if image_summaries:
           add_documents(retriever, image_summaries, images)
       return retriever
-    
-    if 'vectorstore' not in st.session_state:
-        vectorstore = Chroma(collection_name="mm_rag_mistral01",embedding_function=OpenAIEmbeddings(openai_api_key = openai.api_key))
-        st.session_state["vectorstore"] = vectorstore
-    else:
-        vectorstore = st.session_state["vectorstore"]
-    
+
+    vectorstore = Chroma(collection_name="mm_rag_mistral01",embedding_function=OpenAIEmbeddings(openai_api_key = openai.api_key))
+
 
     retriever_multi_vector_img=create_multi_vector_retriever(vectorstore,text_summaries,texts,table_summaries,tables,image_summaries,img_base64_list)
 
