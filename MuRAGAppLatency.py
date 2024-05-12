@@ -337,15 +337,9 @@ if uploaded_file is not None:
     else:
         vectorstore = st.session_state["vectorstore"]
     
-    # Create retreiver
-    if 'retriever_multi_vector_img' not in st.session_state:
-        with st.spinner("Creating Multi vector retreiver"):
-            retriever_multi_vector_img=create_multi_vector_retriever(vectorstore,text_summaries,texts,table_summaries,tables,image_summaries,img_base64_list)
-        st.session_state["retriever_multi_vector_img"] = retriever_multi_vector_img
-    else:
-        retriever_multi_vector_img = st.session_state["retriever_multi_vector_img"]
-    st.write(f"{bullet_point} Multi vector retreiver is created")  
-    
+
+    retriever_multi_vector_img=create_multi_vector_retriever(vectorstore,text_summaries,texts,table_summaries,tables,image_summaries,img_base64_list)
+
     
     def looks_like_base64(sb):
       """Check if the string looks like base64"""
@@ -475,7 +469,6 @@ if uploaded_file is not None:
     if(question):
         response= chain_multimodal_rag.invoke(question)
         st.write(response)
-        retriever_multi_vector_img = st.session_state["retriever_multi_vector_img"]
         docs = retriever_multi_vector_img.get_relevant_documents(question, limit=1)
     
         found_image = False  # Flag variable to track if an image has been found
