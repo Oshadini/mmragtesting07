@@ -467,6 +467,7 @@ if uploaded_file is not None:
         with st.spinner("Processing your question..."):
             start = timer()
             response= chain_multimodal_rag.invoke(question)
+            st.write(f"Time taken: {timer() - start:.2f}s")
             st.write(response)
             docs = retriever_multi_vector_img.get_relevant_documents(question, limit=1)
             st.write(docs)
@@ -486,7 +487,7 @@ if uploaded_file is not None:
                   #img = load_image(image_data)
                   st.image(image_data)
                   found_image = True  # Set the flag to True to indicate that an image has been found 
-        st.write(f"Time taken: {timer() - start:.2f}s")
+        
             
         
         
