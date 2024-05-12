@@ -90,13 +90,13 @@ bullet_point = "◇"
 
 
 question = st.text_input('Enter a question') 
-pr = st.button("Generate")
+pr = st.button("Generate Response")
 if uploaded_file is not None:
-    with st.spinner("Extraction process...."):
-    #st.write(f"{bullet_point} Extraction process started")
-        temp_file="./temp.pdf"
-        with open(temp_file,"wb") as file:
-            file.write(uploaded_file.getvalue())
+    st.spinner():
+    st.write(f"{bullet_point} Extraction process started")
+    temp_file="./temp.pdf"
+    with open(temp_file,"wb") as file:
+        file.write(uploaded_file.getvalue())
 
     
     image_path = "./"
@@ -464,7 +464,7 @@ if uploaded_file is not None:
 
    
     if pr ==True:
-        with st.spinner("Response generation in process....."):
+        with st.spinner("Processing your question..."):
             response= chain_multimodal_rag.invoke(question)
             st.write(response)
             docs = retriever_multi_vector_img.get_relevant_documents(question, limit=1)
@@ -485,7 +485,8 @@ if uploaded_file is not None:
                   #img = load_image(image_data)
                   st.image(image_data)
                   found_image = True  # Set the flag to True to indicate that an image has been found 
+        st.write(f"Time taken: {timer() - start:.2f}s")
+            
         
-    
-    
-    
+        
+        
